@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Rating from '@mui/material/Rating';
 import { StyleCardUser } from './StyleCardUser';
-import { DateTime } from 'luxon'
+// import { DateTime } from 'luxon'
 
 
 interface MyObject {

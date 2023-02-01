@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material"
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { DateTime } from 'luxon'
+// import { DateTime } from 'luxon'
+const {DateTime} = require('luxon')
 
 
 interface Props {
