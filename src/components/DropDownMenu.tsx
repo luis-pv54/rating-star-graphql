@@ -13,6 +13,7 @@ import { StyleCardUser } from './StyleCardUser';
 
 
 interface MyObject {
+  createdAt: any;
   data: string;
   [key: string]: any;
 }

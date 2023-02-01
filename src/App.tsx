@@ -15,6 +15,7 @@ import { linearProgressClasses } from '@mui/material/LinearProgress';
 import { styled } from '@mui/material/styles';
 import DropDownMenu from './components/DropDownMenu'
 import BorderLinearProgress from './components/BorderLinearProgress';
+import { type } from 'os';
 
 
 const client = new ApolloClient({
@@ -54,9 +55,6 @@ function MyComponent() {
   const test = documents.slice().reduce((acc:number, item:any) => JSON.parse(item.data.replaceAll("=>", ":")));
   const average = Number(avgRating) / Number(documents.length)
   const distance = 2;
-  console.log(documents.length)
-  // console.log(test)
-  
   
   return (
     <Container sx={{

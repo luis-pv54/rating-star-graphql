@@ -1,12 +1,19 @@
 import { Box, Typography } from "@mui/material"
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 // import { DateTime } from 'luxon'
-const {DateTime} = require('luxon')
+import { DateTime } from 'luxon';
 
+interface DataObject {
+  userName: string;
+  feedbackMessage: string;
+}
 
+interface ObjObject {
+  createdAt?: any;
+}
 interface Props {
-    data: Object;
-    obj: Object;
+    data?: DataObject;
+    obj?: ObjObject | any;
 }
 export const StyleCardUser = ({data,obj}:Props) => {
     return (
@@ -37,11 +44,15 @@ export const StyleCardUser = ({data,obj}:Props) => {
                 fontWeight: 'bold',
                 marginLeft: '5px',
               }}>
-                {data.userName}
-                {console.log(data)}
+                {data && data.userName}
+                {/* {console.log(data)} */}
               </Typography>
             <Typography>
                 {DateTime.fromISO(obj.createdAt).toFormat('DD t')}
+
+                {/* {DateTime.fromISO(obj && obj.createdAt).toFormat('DD t')} */}
+                {/* {obj && obj.createdAt ? DateTime.fromISO(obj.createdAt).toFormat('DD t') : ''} */}
+                {/* {obj && obj.createdAt ? DateTime.fromISO(obj.createdAt.toISOString()).toFormat('DD t') : ''} */}
             </Typography>
             </Box>
             <Typography variant="body1" component="p"
@@ -49,7 +60,7 @@ export const StyleCardUser = ({data,obj}:Props) => {
                     marginTop: '15px',
                 }}
             >
-                {data.feedbackMessage}
+                {data && data.feedbackMessage}
             </Typography>
 
           </Box>   
