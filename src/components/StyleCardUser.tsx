@@ -47,14 +47,17 @@ export const StyleCardUser = ({data,obj}:Props) => {
                 {data && data.userName}
                 {/* {console.log(data)} */}
               </Typography>
-            <Typography>
-                {DateTime.fromISO(obj.createdAt).toFormat('DD t')}
-
-                {/* {DateTime.fromISO(obj && obj.createdAt).toFormat('DD t')} */}
-                {/* {obj && obj.createdAt ? DateTime.fromISO(obj.createdAt).toFormat('DD t') : ''} */}
-                {/* {obj && obj.createdAt ? DateTime.fromISO(obj.createdAt.toISOString()).toFormat('DD t') : ''} */}
-            </Typography>
             </Box>
+            <Typography sx={{
+              display: 'inline-block',
+              marginRight: 'auto',
+              marginTop: '.2rem',
+              paddingLeft: '.2rem',
+              fontSize: '.8rem',
+              fontWeight: '400',
+            }}>
+                {DateTime.fromISO(obj && obj.createdAt).toFormat('DD t')}
+            </Typography>
             <Typography variant="body1" component="p"
                 sx={{
                     marginTop: '15px',

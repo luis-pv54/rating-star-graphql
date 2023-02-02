@@ -10,6 +10,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Rating from '@mui/material/Rating';
 import { StyleCardUser } from './StyleCardUser';
 // import { DateTime } from 'luxon'
+import MaterialUIPicker from './MaterialUIPicker';
 
 
 interface MyObject {
@@ -68,25 +69,25 @@ export default function DropDownMenu({handleTabChange}:Props) {
   const data4 = filteredData4.map(obj => {
     const data = JSON.parse(obj.data.replace(/=>/g, ':'));
     return(
-      <StyleCardUser data={data}/>
+      <StyleCardUser data={data} obj={obj}/>
     )
   });
   const data3 = filteredData3.map(obj => {
     const data = JSON.parse(obj.data.replace(/=>/g, ':'));
     return(
-      <StyleCardUser data={data}/>
+      <StyleCardUser data={data} obj={obj}/>
     )
   });
   const data2 = filteredData2.map(obj => {
     const data = JSON.parse(obj.data.replace(/=>/g, ':'));
     return(
-      <StyleCardUser data={data}/>
+      <StyleCardUser data={data} obj={obj}/>
     )
   });
   const data1 = filteredData1.map(obj => {
     const data = JSON.parse(obj.data.replace(/=>/g, ':'));
     return(
-      <StyleCardUser data={data}/>
+      <StyleCardUser data={data} obj={obj}/>
     )
   });
 
@@ -111,7 +112,10 @@ export default function DropDownMenu({handleTabChange}:Props) {
             <Tab label="1 Star" value="5" />
           </TabList>
         </Box>
-        <TabPanel value="1">{data5}</TabPanel>
+        <TabPanel value="1">
+          <MaterialUIPicker />
+          {data5}
+        </TabPanel>
         <TabPanel value="2">{data4}</TabPanel>
         <TabPanel value="3">{data3}</TabPanel>
         <TabPanel value="4">{data2}</TabPanel>
