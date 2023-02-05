@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material"
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 // import { DateTime } from 'luxon'
 import { DateTime } from 'luxon';
+import MaterialUIPicker from "./MaterialUIPicker";
 
 interface DataObject {
   userName: string;
@@ -14,9 +15,12 @@ interface ObjObject {
 interface Props {
     data?: DataObject;
     obj?: ObjObject | any;
+    
 }
 export const StyleCardUser = ({data,obj}:Props) => {
+  const date = DateTime.fromISO(obj && obj.createdAt).toFormat('DD t');
     return (
+      
         <Box sx={{
             height: '8rem',
             backgroundColor: '#d0bcd5',
@@ -56,7 +60,8 @@ export const StyleCardUser = ({data,obj}:Props) => {
               fontSize: '.8rem',
               fontWeight: '400',
             }}>
-                {DateTime.fromISO(obj && obj.createdAt).toFormat('DD t')}
+              {date}
+              
             </Typography>
             <Typography variant="body1" component="p"
                 sx={{
@@ -65,7 +70,6 @@ export const StyleCardUser = ({data,obj}:Props) => {
             >
                 {data && data.feedbackMessage}
             </Typography>
-
-          </Box>   
+          </Box>  
     )
 }

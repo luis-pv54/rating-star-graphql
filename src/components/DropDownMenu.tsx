@@ -11,6 +11,7 @@ import Rating from '@mui/material/Rating';
 import { StyleCardUser } from './StyleCardUser';
 // import { DateTime } from 'luxon'
 import MaterialUIPicker from './MaterialUIPicker';
+import { ButtonSearchDates } from './ButtonSearchDates';
 
 
 interface MyObject {
@@ -22,6 +23,7 @@ interface MyObject {
 interface Props {
   handleTabChange: MyObject[];
   rating?: number;
+ 
 }
 
 
@@ -32,7 +34,7 @@ export default function DropDownMenu({handleTabChange}:Props) {
     setValue(newValue);
   };
 
-  
+  // Filter by star 
   const filteredData5 = handleTabChange.filter(obj => {
     const data = JSON.parse(obj.data.replace(/=>/g, ':'));
     return data.rating === 5;
@@ -58,32 +60,39 @@ export default function DropDownMenu({handleTabChange}:Props) {
     return data.rating === 1;
   });
 
+  // Display stars on the screen 
+
   const data5 = filteredData5.map(obj => {
     const data = JSON.parse(obj.data.replace(/=>/g, ':'));
     return(
       <>
-        <StyleCardUser data={data} obj={obj}/>
+        <StyleCardUser data={data} obj={obj} />
       </>
     )
+    
   });
+
   const data4 = filteredData4.map(obj => {
     const data = JSON.parse(obj.data.replace(/=>/g, ':'));
     return(
       <StyleCardUser data={data} obj={obj}/>
     )
   });
+
   const data3 = filteredData3.map(obj => {
     const data = JSON.parse(obj.data.replace(/=>/g, ':'));
     return(
       <StyleCardUser data={data} obj={obj}/>
     )
   });
+
   const data2 = filteredData2.map(obj => {
     const data = JSON.parse(obj.data.replace(/=>/g, ':'));
     return(
       <StyleCardUser data={data} obj={obj}/>
     )
   });
+
   const data1 = filteredData1.map(obj => {
     const data = JSON.parse(obj.data.replace(/=>/g, ':'));
     return(
@@ -113,7 +122,8 @@ export default function DropDownMenu({handleTabChange}:Props) {
           </TabList>
         </Box>
         <TabPanel value="1">
-          <MaterialUIPicker />
+          <MaterialUIPicker datos={filteredData5}/>
+          {/* <ButtonSearchDates /> */}
           {data5}
         </TabPanel>
         <TabPanel value="2">{data4}</TabPanel>
