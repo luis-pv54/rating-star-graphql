@@ -13,7 +13,6 @@ import { StyleCardUser } from './StyleCardUser';
 import MaterialUIPicker from './MaterialUIPicker';
 import { ButtonSearchDates } from './ButtonSearchDates';
 
-
 interface MyObject {
   createdAt: any;
   data: string;

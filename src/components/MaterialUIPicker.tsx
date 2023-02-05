@@ -31,7 +31,7 @@ export default function MaterialUIPicker({datos = []}: Props) {
     );
     
     const [endDate, setEndDate] = React.useState<Dayjs | null>(
-      dayjs('2023-01-09T21:11:54'),
+      dayjs('2023-01-09T21:11:54+00:00'),
       );
     
     const formattedDateStart = startDate?.format('MMM D, YYYY h:mm A');
@@ -80,7 +80,7 @@ export default function MaterialUIPicker({datos = []}: Props) {
         />
       </Stack>
     </LocalizationProvider>
-    <ButtonSearchDates startDate={formattedDateStart} endDate={formattedDateEnd} datos={datos}/>
+    <ButtonSearchDates startDate={startDate} endDate={endDate} datos={datos}/>
     </>
   );
 }
