@@ -31,7 +31,7 @@ export default function MaterialUIPicker({datos = []}: Props) {
     );
     
     const [endDate, setEndDate] = React.useState<Dayjs | null>(
-      dayjs('2023-01-09T21:11:54+00:00'),
+      dayjs('2023-01-09T21:11:54'),
       );
     
     const formattedDateStart = startDate?.format('MMM D, YYYY h:mm A');
@@ -46,16 +46,16 @@ export default function MaterialUIPicker({datos = []}: Props) {
       setEndDate(newValue);
     };
     
-    datos.forEach(dato => {
-      const createdAt = dayjs(dato.createdAt);
-      if(dato.createdAt){
-        const date = DateTime.fromISO(dato.createdAt).toFormat('DD t');
-        // console.log(date);
-      }
-      if (createdAt.isBetween(startDate, endDate) && (startDate && endDate) ) {
-        // console.log(`${dato.createdAt} está entre ${startDate.format()} y ${endDate.format()}`);
-      }
-    });
+    // datos.map(dato => {
+    //   const createdAt = dayjs(dato.createdAt);
+    //   if(dato.createdAt){
+    //     const date = DateTime.fromISO(dato.createdAt).toFormat('DD t');
+    //     console.log(date);
+    //   }
+    //   if (createdAt.isBetween(startDate, endDate) && (startDate && endDate) ) {
+    //     // console.log(`${dato.createdAt} está entre ${startDate.format()} y ${endDate.format()}`);
+    //   }
+    // });
 
     // console.log(typeof(startDate))
  
@@ -80,7 +80,7 @@ export default function MaterialUIPicker({datos = []}: Props) {
         />
       </Stack>
     </LocalizationProvider>
-    <ButtonSearchDates startDate={startDate} endDate={endDate} datos={datos}/>
+    <ButtonSearchDates startDate={formattedDateStart} endDate={formattedDateEnd} datos={datos}/>
     </>
   );
 }

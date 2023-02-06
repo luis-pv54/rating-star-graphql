@@ -12,6 +12,7 @@ import { StyleCardUser } from './StyleCardUser';
 // import { DateTime } from 'luxon'
 import MaterialUIPicker from './MaterialUIPicker';
 import { ButtonSearchDates } from './ButtonSearchDates';
+import Button from '@mui/material/Button';
 
 interface MyObject {
   createdAt: any;
@@ -20,7 +21,7 @@ interface MyObject {
 }
 
 interface Props {
-  handleTabChange: MyObject[];
+  handleTabChange: MyObject[] ;
   rating?: number;
  
 }
@@ -28,6 +29,8 @@ interface Props {
 
 export default function DropDownMenu({handleTabChange}:Props) {
   const [value, setValue] = React.useState(1);
+  const [showData, setShowData] = React.useState(true)
+
 
   const handleChange = (event:any, newValue:number) => {
     setValue(newValue);
@@ -99,6 +102,9 @@ export default function DropDownMenu({handleTabChange}:Props) {
     )
   });
 
+  const toggleData = () => {
+    setShowData(!showData)
+  }
   
   return (
     <Box sx={{ maxWidth: { xs: 320, sm: 480 }, bgcolor: 'background.paper' }}>
@@ -120,10 +126,16 @@ export default function DropDownMenu({handleTabChange}:Props) {
             <Tab label="1 Star" value="5" />
           </TabList>
         </Box>
+        <Button variant="contained" 
+            sx={{
+              display: 'block',
+              margin: '1rem auto',
+            }}
+            onClick={toggleData}
+            >RESET</Button>
         <TabPanel value="1">
           <MaterialUIPicker datos={filteredData5}/>
-          {/* <ButtonSearchDates /> */}
-          {data5}
+          {showData  && data5}
         </TabPanel>
         <TabPanel value="2">{data4}</TabPanel>
         <TabPanel value="3">{data3}</TabPanel>

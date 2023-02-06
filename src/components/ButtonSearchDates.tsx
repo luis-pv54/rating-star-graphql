@@ -1,36 +1,55 @@
 import Button from '@mui/material/Button';
 import dayjs, { Dayjs } from 'dayjs';
-import React from 'react';
+import React, {useState} from 'react';
+import { DateTime } from 'luxon'
+import { StyleCardUser } from './StyleCardUser';
+import DropDownMenu from './DropDownMenu';
 
 
-interface MyString {
-    createdAt?: String;
+interface MyObject {
+    data?: string;
+    createdAt?: String | Date;
 }
 
 interface Props {
     startDate: any
     endDate: any
-    datos: MyString[]
+    datos: MyObject[]
 }
 
 export const ButtonSearchDates = ({startDate, endDate, datos}: Props) => {
-    const formattedStartDate = startDate?.format('YYYY-MM-DDTHH:mm:ss+00:00');
-    const formattedEndDate = endDate?.format('YYYY-MM-DDTHH:mm:ss+00:00');
-    
-    const prueba = () => {
-        // console.log(startDate)
-        console.log(formattedStartDate)
-        console.log(formattedEndDate)
-        console.log(endDate)
-        const datotes = datos.map(dato => {
-            return dato.createdAt
-        })
+    const [showData, setShowData] = React.useState(false)
+    const startFDate = dayjs(startDate)
+    const endFDate = dayjs(endDate)    
+    const MyContext = React.createContext({});
 
-        console.log(datotes)
+    const formattedDatos = datos
+    .filter(dato => {
+        let createdAt: Dayjs = dayjs(0);
+        if (typeof dato.createdAt === "string") {
+        const format = DateTime.fromISO(dato.createdAt).toFormat("DD t");
+        createdAt = dayjs(format);
+      } else if (dato.createdAt instanceof Date) {
+        createdAt = dayjs(dato.createdAt);
+      }
 
+      return createdAt.isBetween(startFDate, endFDate);
+    })
+    .map(obj => {
+        const data = obj.data ? JSON.parse(obj.data.replace(/=>/g, ':')): undefined
+        return(
+            <>
+            <StyleCardUser data={data} obj={obj} />
+            </>
+        )
+        
+    });
+
+    const toggleData = () => {
+        setShowData(!showData)
     }
 
-    // console.log(startDate.$d)
+
     return (
         <>
             <Button variant="contained" 
@@ -38,10 +57,16 @@ export const ButtonSearchDates = ({startDate, endDate, datos}: Props) => {
               display: 'block',
               margin: '1rem auto',
             }}
-            onClick={prueba}
+            onClick={toggleData}
             >
             Search
             </Button>
+            {/* {showData && data5} */}
+            {showData && formattedDatos}
+            {/* <MyContext.Provider value={{ showData, setShowData }}>
+                <DropDownMenu handleTabChange={}/>
+            </MyContext.Provider> */}
+        
         </>
     )
 }
