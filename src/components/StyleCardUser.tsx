@@ -22,7 +22,7 @@ export const StyleCardUser = ({data,obj}:Props) => {
     return (
       
         <Box sx={{
-            height: '8rem',
+            height: '100%',
             backgroundColor: '#d0bcd5',
             display: 'flex',
             flexDirection: 'column',
@@ -41,35 +41,35 @@ export const StyleCardUser = ({data,obj}:Props) => {
             fontWeight: '700',
           }}>
       
-            <Box sx={{ display: 'flex' }}>
-            <AccountCircleIcon />
-              <Typography variant='body1' component="h2" sx={{
-                fontSize: '15px',
-                fontWeight: 'bold',
-                marginLeft: '5px',
-              }}>
-                {data && data.userName}
-                {/* {console.log(data)} */}
-              </Typography>
-            </Box>
-            <Typography sx={{
-              display: 'inline-block',
+          <Typography variant="body1" component='p'
+            sx={{
               marginRight: 'auto',
-              marginTop: '.2rem',
-              paddingLeft: '.2rem',
               fontSize: '.8rem',
-              fontWeight: '400',
+              marginBottom: '.2rem',
+            }}
+          >
+            {date}
+          </Typography>
+          <Box sx={{ display: 'flex'}}>
+          <AccountCircleIcon />
+            <Typography variant='body1' component="h2" sx={{
+              fontSize: '15px',
+              fontWeight: 'bold',
+              marginLeft: '5px',
             }}>
-              {date}
-              
+              {data && data.userName}
+              {/* {console.log(data)} */}
             </Typography>
-            <Typography variant="body1" component="p"
-                sx={{
-                    marginTop: '15px',
-                }}
-            >
-                {data && data.feedbackMessage}
-            </Typography>
-          </Box>  
+          </Box>
+          <Typography variant="body1" component="p"
+              sx={{
+                marginTop: '.4rem',
+                marginBottom: '.3rem'
+
+              }}
+          >
+              {data && data.feedbackMessage}
+          </Typography>
+        </Box>  
     )
 }
