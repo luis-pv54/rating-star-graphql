@@ -55,7 +55,42 @@ function MyComponent() {
   const test = documents.slice().reduce((acc:number, item:any) => JSON.parse(item.data.replaceAll("=>", ":")));
   const average = Number(avgRating) / Number(documents.length)
   const distance = 2;
-  
+
+  // test.map( (item: any) => {
+  //   console.log(item)
+  // })
+  // console.table(documents)
+  let rate5 = 0
+  let rate4 = 0
+  let rate3 = 0
+  let rate2 = 0
+  let rate1 = 0
+
+  documents.forEach((obj: { data: string; }) => {
+    const data = JSON.parse(obj.data.replace(/=>/g, ':'));
+    
+    // return data.rating === 5;
+    if(data.rating === 5){
+      rate5++;
+    }
+    if(data.rating === 4){
+      rate4++;
+    }if(data.rating === 3){
+      rate3++;
+    }if(data.rating === 2){
+      rate2++;
+    }if(data.rating === 1){
+      rate1++;
+    }
+    // return [rate5,rate4,rate3,rate2,rate1]
+  });
+
+  const convertPercentage  = (num: number): number => parseFloat((num / documents.length * 100).toFixed(2));
+
+
+  console.log(convertPercentage(339))
+  console.log(rate5,rate4,rate3,rate2,rate1)
+
   return (
     <Container sx={{
       marginTop: 5
@@ -74,11 +109,11 @@ function MyComponent() {
         </Box>
         <Box sx={{ width: '60%'}}>
         
-          <BorderLinearProgress value={100} starNum={5}/>
-          <BorderLinearProgress value={70} starNum={4}/>
-          <BorderLinearProgress value={50} starNum={3}/>
-          <BorderLinearProgress value={30} starNum={2}/>
-          <BorderLinearProgress value={10} starNum={1}/>
+          <BorderLinearProgress value={convertPercentage(rate5)} starNum={5}/>
+          <BorderLinearProgress value={convertPercentage(rate4)} starNum={4}/>
+          <BorderLinearProgress value={convertPercentage(rate3)} starNum={3}/>
+          <BorderLinearProgress value={convertPercentage(rate2)} starNum={2}/>
+          <BorderLinearProgress value={convertPercentage(rate1)} starNum={1}/>
           
         </Box>
       
