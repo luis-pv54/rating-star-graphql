@@ -1,9 +1,10 @@
 import Button from '@mui/material/Button';
 import dayjs, { Dayjs } from 'dayjs';
-import React, {useState} from 'react';
+import React, {useState, createContext} from 'react';
 import { DateTime } from 'luxon'
 import { StyleCardUser } from './StyleCardUser';
 import DropDownMenu from './DropDownMenu';
+
 
 
 interface MyObject {
@@ -17,11 +18,13 @@ interface Props {
     datos: MyObject[]
 }
 
+
+
 export const ButtonSearchDates = ({startDate, endDate, datos}: Props) => {
-    const [showData, setShowData] = React.useState(false)
+    const [showData, setShowData] = useState(false)
     const startFDate = dayjs(startDate)
     const endFDate = dayjs(endDate)    
-    const MyContext = React.createContext({});
+
 
     const formattedDatos = datos
     .filter(dato => {
@@ -66,6 +69,7 @@ export const ButtonSearchDates = ({startDate, endDate, datos}: Props) => {
             {/* <MyContext.Provider value={{ showData, setShowData }}>
                 <DropDownMenu handleTabChange={}/>
             </MyContext.Provider> */}
+
         
         </>
     )

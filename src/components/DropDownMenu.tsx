@@ -4,15 +4,15 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import Tabs from '@mui/material/Tabs';
-import Typography from '@mui/material/Typography';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import Rating from '@mui/material/Rating';
 import { StyleCardUser } from './StyleCardUser';
-// import { DateTime } from 'luxon'
-import MaterialUIPicker from './MaterialUIPicker';
-import { ButtonSearchDates } from './ButtonSearchDates';
 import Button from '@mui/material/Button';
+import dayjs, { Dayjs } from 'dayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import Stack from '@mui/material/Stack';
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+import TextField from '@mui/material/TextField';
+import { DateTime } from 'luxon'
 
 interface MyObject {
   createdAt: any;
@@ -29,7 +29,28 @@ interface Props {
 
 export default function DropDownMenu({handleTabChange}:Props) {
   const [value, setValue] = React.useState(1);
-  const [showData, setShowData] = React.useState(true)
+  const [showSearch, setShowSearch] = React.useState(false)
+  const [showReset, setShowReset] = React.useState(true)
+
+  const [startDate, setStartDate] = React.useState<Dayjs | null>(
+    dayjs('2020-08-18T21:11:54'),
+    );
+    
+    const [endDate, setEndDate] = React.useState<Dayjs | null>(
+      dayjs('2023-01-09T21:11:54'),
+      );
+    
+    const formattedDateStart = startDate?.format('MMM D, YYYY h:mm A');
+    const formattedDateEnd = endDate?.format('MMM D, YYYY h:mm A');
+
+
+    const handleChangeStart = (newValue: Dayjs | null) => {
+      setStartDate(newValue);
+    };
+    
+    const handleChangeEnd = (newValue: Dayjs | null) => {
+      setEndDate(newValue);
+    };
 
 
   const handleChange = (event:any, newValue:number) => {
@@ -101,11 +122,64 @@ export default function DropDownMenu({handleTabChange}:Props) {
       <StyleCardUser data={data} obj={obj}/>
     )
   });
-
-  const toggleData = () => {
-    setShowData(!showData)
-  }
   
+  const FilterData = () => {
+  
+    const filteredData = filteredData5.filter(item => {
+      let dayjsDateddd = dayjs(item.createdAt);
+      const formattedDate = dayjsDateddd.format('MMM D, YYYY h:mm A');
+      const dayjsDate = dayjs(formattedDate);
+      
+      if (dayjsDate.isAfter(startDate) || dayjsDate.isSame(startDate)) {
+        if (dayjsDate.isBefore(endDate) || dayjsDate.isSame(endDate)) {
+          return item
+        }
+      }
+    });
+
+    const filtrado = filteredData.map( (obj,index) => {
+      const data = JSON.parse(obj.data.replace(/=>/g, ':'));
+      return(
+        <StyleCardUser data={data} obj={obj} key={index}/>
+      )
+
+      
+    })
+
+    return filtrado
+    
+  }
+
+  const toggleSearch = () => {
+    if(showReset){
+      setShowReset(!showReset)
+    }
+    setShowSearch(true)
+  }
+
+  const toggleReset = () => {
+    if(showSearch){
+      setShowSearch(!showSearch)
+    }
+    setShowReset(true)
+  }
+  const ButtonSearch = () => {
+
+    return(
+      <Button 
+      variant="contained" 
+        sx={{
+          display: 'block',
+          margin: '1rem auto',
+          padding: '.5rem 3rem',
+        }}
+        onClick={toggleSearch}
+        >
+        Search
+      </Button>
+    )
+  }
+
   return (
     <Box sx={{ maxWidth: { xs: 320, sm: 480 }, bgcolor: 'background.paper' }}>
       <TabContext 
@@ -126,16 +200,51 @@ export default function DropDownMenu({handleTabChange}:Props) {
             <Tab label="1 Star" value="5" />
           </TabList>
         </Box>
-        <Button variant="contained" 
-            sx={{
-              display: 'block',
-              margin: '1rem auto',
-            }}
-            onClick={toggleData}
-            >RESET</Button>
+        
+
         <TabPanel value="1">
-          <MaterialUIPicker datos={filteredData5}/>
-          {showData  && data5}
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Stack spacing={3}>
+            
+              <MobileDatePicker
+                label="Start Date"
+                inputFormat="MMM D, YYYY h:mm A"
+                value={startDate}
+                onChange={handleChangeStart}
+                renderInput={(params) => <TextField {...params} />}
+              />
+              <MobileDatePicker
+                label="End Date"
+                inputFormat="MMM D, YYYY h:mm A"
+                value={endDate}
+                onChange={handleChangeEnd}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </Stack>
+        </LocalizationProvider>
+
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'column',
+        }}>
+        <ButtonSearch />
+        <Button 
+          variant="contained" 
+          sx={{
+            display: 'block',
+            margin: '1rem auto',
+            padding: '.5rem 3rem',
+          }}
+          onClick={toggleReset}
+        >
+          RESET
+        </Button>
+        </Box>
+
+        {/* <ButtonSearchDates startDate={formattedDateStart} endDate={formattedDateEnd} datos={datos}/> */}
+          {/* <MaterialUIPicker datos={filteredData5}/> */}
+          {showReset  && data5}
+          {showSearch && FilterData()}
         </TabPanel>
         <TabPanel value="2">{data4}</TabPanel>
         <TabPanel value="3">{data3}</TabPanel>
