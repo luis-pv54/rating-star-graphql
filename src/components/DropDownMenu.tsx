@@ -123,9 +123,13 @@ export default function DropDownMenu({handleTabChange}:Props) {
     )
   });
   
-  const FilterData = () => {
+  interface DataObject {
+    createdAt: string;
+    data: string;
+  }
+  const FilterData = (data: Array<DataObject>) => {
   
-    const filteredData = filteredData5.filter(item => {
+    const filteredData = data.filter(item => {
       let dayjsDateddd = dayjs(item.createdAt);
       const formattedDate = dayjsDateddd.format('MMM D, YYYY h:mm A');
       const dayjsDate = dayjs(formattedDate);
@@ -180,6 +184,10 @@ export default function DropDownMenu({handleTabChange}:Props) {
     )
   }
 
+  const resetTab = () =>{
+   console.log(showSearch)
+   console.log(showReset)
+  }
   return (
     <Box sx={{ maxWidth: { xs: 320, sm: 480 }, bgcolor: 'background.paper' }}>
       <TabContext 
@@ -193,11 +201,11 @@ export default function DropDownMenu({handleTabChange}:Props) {
             allowScrollButtonsMobile
             aria-label="scrollable force tabs example"
             >
-            <Tab label="5 Star"  value="1" />
-            <Tab label="4 Star" value="2" />
-            <Tab label="3 Star" value="3" />
-            <Tab label="2 Star" value="4" />
-            <Tab label="1 Star" value="5" />
+            <Tab label="5 Star"  value="1" onClick={toggleReset}/>
+            <Tab label="4 Star" value="2" onClick={toggleReset}/>
+            <Tab label="3 Star" value="3" onClick={toggleReset}/>
+            <Tab label="2 Star" value="4" onClick={toggleReset}/>
+            <Tab label="1 Star" value="5" onClick={toggleReset}/>
           </TabList>
         </Box>
         
@@ -244,12 +252,187 @@ export default function DropDownMenu({handleTabChange}:Props) {
         {/* <ButtonSearchDates startDate={formattedDateStart} endDate={formattedDateEnd} datos={datos}/> */}
           {/* <MaterialUIPicker datos={filteredData5}/> */}
           {showReset  && data5}
-          {showSearch && FilterData()}
+          {showSearch && FilterData(filteredData5)}
         </TabPanel>
-        <TabPanel value="2">{data4}</TabPanel>
+
+        <TabPanel value="2" >
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Stack spacing={3}>
+            
+              <MobileDatePicker
+                label="Start Date"
+                inputFormat="MMM D, YYYY h:mm A"
+                value={startDate}
+                onChange={handleChangeStart}
+                renderInput={(params) => <TextField {...params} />}
+              />
+              <MobileDatePicker
+                label="End Date"
+                inputFormat="MMM D, YYYY h:mm A"
+                value={endDate}
+                onChange={handleChangeEnd}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </Stack> 
+        </LocalizationProvider>
+
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'column',
+        }}>
+        <ButtonSearch />
+        <Button 
+          variant="contained" 
+          sx={{
+            display: 'block',
+            margin: '1rem auto',
+            padding: '.5rem 3rem',
+          }}
+          onClick={toggleReset}
+        >
+          RESET
+        </Button>
+        </Box>
+          {showReset  && data4}
+          {showSearch && FilterData(filteredData4)}
+        </TabPanel>
+
+        <TabPanel value="3">
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Stack spacing={3}>
+            
+              <MobileDatePicker
+                label="Start Date"
+                inputFormat="MMM D, YYYY h:mm A"
+                value={startDate}
+                onChange={handleChangeStart}
+                renderInput={(params) => <TextField {...params} />}
+              />
+              <MobileDatePicker
+                label="End Date"
+                inputFormat="MMM D, YYYY h:mm A"
+                value={endDate}
+                onChange={handleChangeEnd}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </Stack> 
+        </LocalizationProvider>
+
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'column',
+        }}>
+        <ButtonSearch />
+        <Button 
+          variant="contained" 
+          sx={{
+            display: 'block',
+            margin: '1rem auto',
+            padding: '.5rem 3rem',
+          }}
+          onClick={toggleReset}
+        >
+          RESET
+        </Button>
+        </Box>
+
+          {showReset  && data3}
+          {showSearch && FilterData(filteredData3)}
+        </TabPanel>
+
+        <TabPanel value="4">
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Stack spacing={3}>
+            
+              <MobileDatePicker
+                label="Start Date"
+                inputFormat="MMM D, YYYY h:mm A"
+                value={startDate}
+                onChange={handleChangeStart}
+                renderInput={(params) => <TextField {...params} />}
+              />
+              <MobileDatePicker
+                label="End Date"
+                inputFormat="MMM D, YYYY h:mm A"
+                value={endDate}
+                onChange={handleChangeEnd}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </Stack> 
+        </LocalizationProvider>
+
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'column',
+        }}>
+        <ButtonSearch />
+        <Button 
+          variant="contained" 
+          sx={{
+            display: 'block',
+            margin: '1rem auto',
+            padding: '.5rem 3rem',
+          }}
+          onClick={toggleReset}
+        >
+          RESET
+        </Button>
+        </Box>
+
+        {/* <ButtonSearchDates startDate={formattedDateStart} endDate={formattedDateEnd} datos={datos}/> */}
+          {/* <MaterialUIPicker datos={filteredData5}/> */}
+          {showReset  && data2}
+          {showSearch && FilterData(filteredData2)}
+        </TabPanel>
+
+        <TabPanel value="5">
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Stack spacing={3}>
+            
+              <MobileDatePicker
+                label="Start Date"
+                inputFormat="MMM D, YYYY h:mm A"
+                value={startDate}
+                onChange={handleChangeStart}
+                renderInput={(params) => <TextField {...params} />}
+              />
+              <MobileDatePicker
+                label="End Date"
+                inputFormat="MMM D, YYYY h:mm A"
+                value={endDate}
+                onChange={handleChangeEnd}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </Stack> 
+        </LocalizationProvider>
+
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'column',
+        }}>
+        <ButtonSearch />
+        <Button 
+          variant="contained" 
+          sx={{
+            display: 'block',
+            margin: '1rem auto',
+            padding: '.5rem 3rem',
+          }}
+          onClick={toggleReset}
+        >
+          RESET
+        </Button>
+        </Box>
+
+        {/* <ButtonSearchDates startDate={formattedDateStart} endDate={formattedDateEnd} datos={datos}/> */}
+          {/* <MaterialUIPicker datos={filteredData5}/> */}
+          {showReset  && data1}
+          {showSearch && FilterData(filteredData1)}
+        </TabPanel>
+        {/* <TabPanel value="2">{data4}</TabPanel>
         <TabPanel value="3">{data3}</TabPanel>
         <TabPanel value="4">{data2}</TabPanel>
-        <TabPanel value="5">{data1}</TabPanel>
+        <TabPanel value="5">{data1}</TabPanel> */}
         
        
       </TabContext>
