@@ -95,6 +95,7 @@ export default function DropDownMenu({handleTabChange}:Props) {
     
   });
 
+
   const data4 = filteredData4.map(obj => {
     const data = JSON.parse(obj.data.replace(/=>/g, ':'));
     return(
@@ -251,7 +252,7 @@ export default function DropDownMenu({handleTabChange}:Props) {
 
         {/* <ButtonSearchDates startDate={formattedDateStart} endDate={formattedDateEnd} datos={datos}/> */}
           {/* <MaterialUIPicker datos={filteredData5}/> */}
-          {showReset  && data5}
+          {showReset  && data5.reverse()}
           {showSearch && FilterData(filteredData5)}
         </TabPanel>
 
@@ -293,7 +294,7 @@ export default function DropDownMenu({handleTabChange}:Props) {
           RESET
         </Button>
         </Box>
-          {showReset  && data4}
+          {showReset  && data4.reverse()}
           {showSearch && FilterData(filteredData4)}
         </TabPanel>
 
@@ -336,7 +337,7 @@ export default function DropDownMenu({handleTabChange}:Props) {
         </Button>
         </Box>
 
-          {showReset  && data3}
+          {showReset  && data3.reverse()}
           {showSearch && FilterData(filteredData3)}
         </TabPanel>
 
@@ -381,7 +382,7 @@ export default function DropDownMenu({handleTabChange}:Props) {
 
         {/* <ButtonSearchDates startDate={formattedDateStart} endDate={formattedDateEnd} datos={datos}/> */}
           {/* <MaterialUIPicker datos={filteredData5}/> */}
-          {showReset  && data2}
+          {showReset  && data2.reverse()}
           {showSearch && FilterData(filteredData2)}
         </TabPanel>
 
@@ -426,7 +427,7 @@ export default function DropDownMenu({handleTabChange}:Props) {
 
         {/* <ButtonSearchDates startDate={formattedDateStart} endDate={formattedDateEnd} datos={datos}/> */}
           {/* <MaterialUIPicker datos={filteredData5}/> */}
-          {showReset  && data1}
+          {showReset  && data1.reverse()}
           {showSearch && FilterData(filteredData1)}
         </TabPanel>
         {/* <TabPanel value="2">{data4}</TabPanel>
